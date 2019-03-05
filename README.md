@@ -1,11 +1,11 @@
 
 ## Readme
 
-#### Goal
+### Goal
 
 A lightweight virtual DOM implementation.
 
-#### Building
+### Building
 
 Project is written in JavaScript, uses npm for dependencies and webpack for the build work.
 
