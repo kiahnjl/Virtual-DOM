@@ -1,0 +1,13 @@
+{
+  "name": "Virtual-DOM",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm run clean && ./node_modules/.bin/webpack --config webpack.config.js",
+    "clean": "rm -rf ./dist"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  }
+}
