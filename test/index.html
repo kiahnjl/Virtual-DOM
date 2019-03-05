@@ -9,11 +9,123 @@
     <script>
         var rootElement = document.querySelector('.root');
 
-        var domTree = {
-
+        var domTree1 = {
+            type: 'div',
+            children: [
+                {
+                    type: 'h1',
+                    children: [
+                        {
+                            type: 'text',
+                            children: [],
+                            text: 'foo'
+                        }
+                    ]
+                },
+                {
+                    type: 'ul',
+                    children: [
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'foo'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'bar'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'baz'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        var domTree2 = {
+            type: 'div',
+            children: [
+                {
+                    type: 'h1',
+                    children: [
+                        {
+                            type: 'text',
+                            children: [],
+                            text: 'changed!'
+                        }
+                    ]
+                },
+                {
+                    type: 'ul',
+                    children: [
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'foo'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'bar'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'baz'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'new!'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         };
 
-        VDOM.init(domTree, rootElement);
+        // initialize
+        var vdom = VDOM.create(domTree1, rootElement);
+        vdom.render();
+
+        // change
+        // vdom.update(domTree2);
     </script>
 </body>
 </html>
