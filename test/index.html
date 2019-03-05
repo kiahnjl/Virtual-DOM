@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
 </head>
 <body>
+    <div class="root"></div>
+    <script src="../dist/bundle.js"></script>
+    <script>
+        var rootElement = document.querySelector('.root');
 
+        var domTree = {
+
+        };
+
+        VDOM.init(domTree, rootElement);
+    </script>
 </body>
 </html>
