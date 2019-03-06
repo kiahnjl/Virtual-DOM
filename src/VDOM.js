@@ -8,22 +8,62 @@ export default class {
     render(tree) {
         if(this.tree === undefined) {
             this.tree = build(tree);
-            this.container.appendChild(result.element);
+            this.container.appendChild(this.tree.element);
+        } else {
+            this.tree = build(tree, this.tree);
         }
+        
+        console.log(this.tree);
     }
 }
 
-function build(node) {
-    let nodeCopy = emptyNode();
-    nodeCopy.element = createElement(node);
+// super impose the two trees
+function build(nextNode, prevNode) {
+    // I'll be assuming that if a prevNode exists, it always has an element
 
-    node.children.forEach(function(childNode) {
-        let childCopy = build(childNode);
-        nodeCopy.children.push(childCopy);
-        nodeCopy.element.appendChild(childCopy.element);
-    });
+    // the node has been deleted
+    if(nextNode === undefined && prevNode !== undefined) {
+        return undefined;
+    }
 
-    return nodeCopy;
+    let currNode;
+
+    // the node already exists, at least one in that spot does
+    // AND they are the same type. If the type changes
+    // we will re-render that part of the tree
+    if(nextNode !== undefined && prevNode !== undefined &&
+        nextNode.type === prevNode.type
+    ) {
+        currNode = prevNode;
+        currNode.isNew = false;
+    } else {
+        // the node is new! because they cant both be undefined and
+        // the nextNode is not undefined => the prevNode is undefined
+        currNode = emptyNode();
+        currNode.type = nextNode.type;
+        currNode.element = createElement(nextNode);
+        currNode.isNew = true;
+    }
+
+    let nextNodeChildren = nextNode ? nextNode.children : [];
+    let prevNodeChildren = prevNode ? prevNode.children : [];
+    // go through ALL the children nodes
+    for(let i = 0; (i < nextNodeChildren.length || i < prevNodeChildren.length); i++) {
+        let currNodeChild = build(nextNodeChildren[i], prevNodeChildren[i]);
+
+        // this section needs a CLEANUP
+        if(currNodeChild === undefined) {
+            removeArrayItemAt(currNode.children, i);
+            prevNodeChildren[i].element.remove();
+            
+        } else if(currNodeChild !== undefined && currNodeChild.isNew) {
+            insertArrayItemAt(currNode.children, currNodeChild, i);
+            insertElementAt(currNode.element, currNodeChild.element, i);
+        }
+    }
+
+
+    return currNode;
 }
 
 function emptyNode() {
@@ -43,4 +83,18 @@ function createElement(node) {
     }
     
     return element;
+}
+
+function insertElementAt(parentNode, childNode, index) {
+    parentNode.insertBefore(childNode, parentNode.childNodes[index]);
+}
+
+// update to NOT use in-place array mutation
+
+function insertArrayItemAt(arr, item, index) {
+    arr.splice(index, 0, item);
+}
+
+function removeArrayItemAt(arr, index) {
+    arr.splice(index, 1);
 }
