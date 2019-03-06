@@ -7,26 +7,40 @@ export default class {
 
     render(tree) {
         if(this.tree === undefined) {
-            let base = build(tree);
-            this.container.appendChild(base);
-            this.tree = tree;
+            this.tree = build(tree);
+            this.container.appendChild(result.element);
         }
     }
 }
 
 function build(node) {
-    let element;
+    let nodeCopy = emptyNode();
+    nodeCopy.element = createElement(node);
 
+    node.children.forEach(function(childNode) {
+        let childCopy = build(childNode);
+        nodeCopy.children.push(childCopy);
+        nodeCopy.element.appendChild(childCopy.element);
+    });
+
+    return nodeCopy;
+}
+
+function emptyNode() {
+    return {
+        type: '',
+        children: []
+    };
+}
+
+function createElement(node) {
+    let element;
+    
     if(node.type === 'text') {
         element = document.createTextNode(node.text);
     } else {
         element = document.createElement(node.type);
     }
-
-    node.children.forEach(function(child) {
-        let childElement = build(child);
-        element.appendChild(childElement);
-    });
-
+    
     return element;
 }
