@@ -7,8 +7,6 @@
     <div class="root"></div>
     <script src="../dist/bundle.js"></script>
     <script>
-        var rootElement = document.querySelector('.root');
-
         var domTree1 = {
             type: 'div',
             children: [
@@ -121,11 +119,13 @@
         };
 
         // initialize
-        var vdom = VDOM.create(domTree1, rootElement);
-        vdom.render();
+        var vdom = VDOM.create('.root');
+
+        // render
+        vdom.render(domTree1);
 
         // change
-        // vdom.update(domTree2);
+        // vdom.render(domTree2);
     </script>
 </body>
 </html>

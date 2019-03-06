@@ -1,13 +1,16 @@
 
 export default class {
-    constructor(tree, root) {
-        this.tree = tree;
-        this.root = root;
+    constructor(container) {
+        this.container = container;
+        this.tree = undefined;
     }
 
-    render() {
-        let base = build(this.tree);
-        this.root.appendChild(base);
+    render(tree) {
+        if(this.tree === undefined) {
+            let base = build(tree);
+            this.container.appendChild(base);
+            this.tree = tree;
+        }
     }
 }
 
