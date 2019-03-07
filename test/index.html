@@ -125,6 +125,59 @@
             ]
         };
         vdom.render(domTree2);
+
+        // remove a leaf + edge node
+        var domTree3 = {
+            type: 'div',
+            children: [
+                {
+                    type: 'h1',
+                    children: [
+                        {
+                            type: 'text',
+                            children: [],
+                            text: 'changed!'
+                        }
+                    ]
+                },
+                {
+                    type: 'ul',
+                    children: [
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'foo'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'bar'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'li',
+                            children: [
+                                {
+                                    type: 'text',
+                                    children: [],
+                                    text: 'new!'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        vdom.render(domTree3);
     </script>
 </body>
 </html>

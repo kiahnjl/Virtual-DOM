@@ -44,8 +44,9 @@ export function build(nextNode, prevNode) {
 
         // this section needs a CLEANUP
         if(currNodeChild === undefined) {
+            let nodeToRemove = currNode.children[i];
             removeArrayItemAt(currNode.children, i);
-            prevNodeChildren[i].element.remove();
+            nodeToRemove.element.remove();
 
         } else if(currNodeChild !== undefined && currNodeChild.isNew) {
             insertArrayItemAt(currNode.children, currNodeChild, i);
