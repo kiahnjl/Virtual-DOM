@@ -44,7 +44,9 @@ export function build(nextNode, prevNode) {
 
         // this section needs a CLEANUP
         if(currNodeChild === undefined) {
-            let nodeToRemove = currNode.children[i];
+            // if the element is being replaced then it does have children!
+            // but the previous children need to be removed
+            let nodeToRemove = prevNodeChildren[i];
             removeArrayItemAt(currNode.children, i);
             nodeToRemove.element.remove();
 

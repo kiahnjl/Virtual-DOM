@@ -178,6 +178,34 @@
             ]
         };
         vdom.render(domTree3);
+
+        // replace a sub tree
+        var domTree4 = {
+            type: 'div',
+            children: [
+                {
+                    type: 'h1',
+                    children: [
+                        {
+                            type: 'text',
+                            children: [],
+                            text: 'changed!'
+                        }
+                    ]
+                },
+                {
+                    type: 'h2',
+                    children: [
+                        {
+                            type: 'text',
+                            children: [],
+                            text: 'Im now a heading 2!'
+                        }
+                    ]
+                }
+            ]
+        };
+        vdom.render(domTree4);
     </script>
 </body>
 </html>
