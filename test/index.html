@@ -7,6 +7,10 @@
     <div class="root"></div>
     <script src="../dist/bundle.js"></script>
     <script>
+        // initialize
+        var vdom = VDOM.create('.root');
+
+        // render
         var domTree1 = {
             type: 'div',
             children: [
@@ -57,6 +61,9 @@
                 }
             ]
         };
+        vdom.render(domTree1);
+
+        // insert a node
         var domTree2 = {
             type: 'div',
             children: [
@@ -117,14 +124,6 @@
                 }
             ]
         };
-
-        // initialize
-        var vdom = VDOM.create('.root');
-
-        // render
-        vdom.render(domTree1);
-
-        // change
         vdom.render(domTree2);
     </script>
 </body>

@@ -16,8 +16,17 @@ export function build(nextNode, prevNode) {
     if(nextNode !== undefined && prevNode !== undefined &&
         nextNode.type === prevNode.type
     ) {
+        // todo either no mutation or abstract into objects
         currNode = prevNode;
         currNode.isNew = false;
+        
+        // a property may have changed
+        if(currNode.type === 'text') {
+            if(nextNode.text !== prevNode.text) {
+                currNode.element.textContent = nextNode.text;
+            }
+        }
+        
     } else {
         // the node is new! because they cant both be undefined and
         // the nextNode is not undefined => the prevNode is undefined
